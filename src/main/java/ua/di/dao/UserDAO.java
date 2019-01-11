@@ -1,6 +1,8 @@
-package ua.di.DAO;
+package ua.di.dao;
 
 import java.util.List;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -10,18 +12,18 @@ import org.springframework.stereotype.Component;
 import ua.di.model.User;
 
 @Component
-public class UserDima {
+public class UserDAO {
 
 	@Autowired
-//	DataSource dataSource;
-	private JdbcTemplate jdbcTemplate;
+	DataSource dataSource;
+//	private JdbcTemplate jdbcTemplate;
 
 	public List<User> getAll() {
-		return jdbcTemplate.query("select * from users", new BeanPropertyRowMapper<>(User.class));
+		return ((JdbcTemplate) dataSource).query("select * from users", new BeanPropertyRowMapper<>(User.class));
 	}
 
 	public void add(User user) {
-		jdbcTemplate.update("insert into users values (?,?,?)", user.getName(), user.getUrl());
+		((JdbcTemplate) dataSource).update("insert into users values (?,?,?)", user.getName(), user.getUrl());
 
 	}
 }
