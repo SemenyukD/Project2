@@ -12,8 +12,6 @@
 	<mvc:annotation-driven />
 	<context:component-scan base-package="ua.di" />
 	
-	<import resource ="persistence-config.xml"/>
-	
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath"
